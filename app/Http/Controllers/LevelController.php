@@ -223,21 +223,17 @@ class LevelController extends Controller
                 ]);
             }
 
-            $check = LevelModel::find($id);
-            if ($check) {
-                if (!$request->filled('password')) { // jika password tidak diisi, maka hapus dari request
-                    $request->request->remove('password');
-                }
-
-                $check->update($request->all());
+            try{
+                LevelModel::find($id)->update($request->all());
                 return response()->json([
                     'status' => true,
                     'message' => 'Data berhasil diupdate'
                 ]);
-            } else {
+            } catch (\Illuminate\Database\QueryException $e) {
                 return response()->json([
-                    'status' => false,
-                    'message' => 'Data tidak ditemukan'
+                    'status' => false, // respon json, true: berhasil, false: gagal
+                    'message' => 'Validasi gagal.',
+                    'msgField' => $validator->errors() // menunjukkan field mana yang error
                 ]);
             }
         }
