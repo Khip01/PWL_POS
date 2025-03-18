@@ -53,7 +53,6 @@
     </form>
     <script>
         $(document).ready(function() {
-            console.log("READY");
             $("#form-delete").validate({
                 rules: {},
                 submitHandler: function(form) {
