@@ -12,12 +12,12 @@
                 <div class="form-group">
                     <label>Level Kode</label>
                     <input value="" type="text" name="level_kode" id="level_kode" class="form-control" required>
-                    <small id="error-level_kode" class="error-text form-text text-danger"></small>
+                    <small id="error-level-kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Level Nama</label>
                     <input value="" type="text" name="level_nama" id="level_nama" class="form-control" required>
-                    <small id="error-level_nama" class="error-text form-text text-danger"></small>
+                    <small id="error-level-nama" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
