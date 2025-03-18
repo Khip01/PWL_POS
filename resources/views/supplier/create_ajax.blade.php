@@ -12,17 +12,17 @@
                 <div class="form-group">
                     <label>Supplier Kode</label>
                     <input value="" type="text" name="supplier_kode" id="supplier_kode" class="form-control" required>
-                    <small id="error-supplier_kode" class="error-text form-text text-danger"></small>
+                    <small id="error-supplier-kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Supplier Nama</label>
                     <input value="" type="text" name="supplier_nama" id="supplier_nama" class="form-control" required>
-                    <small id="error-supplier_nama" class="error-text form-text text-danger"></small>
+                    <small id="error-supplier-nama" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Supplier Alamat</label>
                     <input value="" type="text" name="supplier_alamat" id="supplier_alamat" class="form-control" required>
-                    <small id="error-supplier_alamat" class="error-text form-text text-danger"></small>
+                    <small id="error-supplier-alamat" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
