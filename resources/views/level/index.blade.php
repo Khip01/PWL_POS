@@ -42,8 +42,9 @@
         }); 
     } 
     
+    var dataUser;
     $(document).ready(function() {
-        var dataUser = $('#table_level').DataTable({
+        dataUser = $('#table_level').DataTable({
             serverSide: true,
             ajax: {
                 "url": "{{ url('level/list') }}",

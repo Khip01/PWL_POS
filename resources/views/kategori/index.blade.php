@@ -42,8 +42,9 @@
         }); 
     } 
     
+    var dataUser;
     $(document).ready(function() {
-        var dataUser = $('#table_kategori').DataTable({
+        dataUser = $('#table_kategori').DataTable({
             serverSide: true,
             ajax: {
                 "url": "{{ url('kategori/list') }}",

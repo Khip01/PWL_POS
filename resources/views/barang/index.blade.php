@@ -61,8 +61,9 @@
         }); 
     } 
     
+    var dataUser;
     $(document).ready(function() {
-        var dataUser = $('#table_barang').DataTable({
+        dataUser = $('#table_barang').DataTable({
             serverSide: true,
             ajax: {
                 "url": "{{ url('barang/list') }}",

@@ -43,8 +43,9 @@
         }); 
     } 
     
+    var dataUser;
     $(document).ready(function() {
-        var dataUser = $('#table_supplier').DataTable({
+        dataUser = $('#table_supplier').DataTable({
             serverSide: true,
             ajax: {
                 "url": "{{ url('supplier/list') }}",
