@@ -63,7 +63,20 @@
                 <i class="nav-icon fas fa-truck"></i>
                 <p>Supplier</p>
             </a>
-        </li>
+          </li>
+          <li class="nav-item mt-4">
+            <a href="{{ url('/logout') }}" class="nav-link btn btn-danger btn-block" style="background-color: #dc3545; color: white;" 
+               onmouseover="this.style.backgroundColor='#e63946'" 
+               onmouseout="this.style.backgroundColor='#dc3545'" 
+               onclick="return confirm('Apakah Anda yakin ingin logout?');">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>Logout</p>
+            </a>
+          </li>
       </ul>
   </nav>
+  {{-- Logout Button --}}
+  {{-- <div class="mt-4">
+    
+  </div> --}}
 </div>
