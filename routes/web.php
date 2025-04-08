@@ -124,18 +124,21 @@ Route::middleware(['auth'])->group(function () { // artinya semua route didalam 
     Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
         Route::get('/barang/', [BarangController::class, 'index']);
         Route::post('/barang/list', [BarangController::class, 'list']);
-        Route::get('/barang/create', [BarangController::class, 'create']);
-        Route::post('/barang/', [BarangController::class, 'store']);
         Route::get('/barang/create_ajax', [BarangController::class, 'create_ajax']); // Menampilkan halaman form tambah user Ajax
         Route::post('/barang/ajax', [BarangController::class, 'store_ajax']); // Menyimpan data user baru Ajax
-        Route::get('/barang/{id}', [BarangController::class, 'show']);
         Route::get('/barang/{id}/show_ajax', [BarangController::class, 'show_ajax']);
-        Route::get('/barang/{id}/edit', [BarangController::class, 'edit']);
-        Route::put('/barang/{id}', [BarangController::class, 'update']);
         Route::get('/barang/{id}/edit_ajax', [BarangController::class, 'edit_ajax']); // Menampilkan halaman form edit user Ajax
         Route::put('/barang/{id}/update_ajax', [BarangController::class, 'update_ajax']); // Menyimpan perubahan data user Ajax
         Route::get('/barang/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
         Route::delete('/barang/{id}/delete_ajax', [BarangController::class, 'delete_ajax']); // Untuk hapus data user Ajax
+        Route::get('/barang/import', [BarangController::class, 'import']); // ajax form upload excel
+        Route::post('/barang/import_ajax', [BarangController::class, 'import_ajax']); // ajax import excel
+        // Tanpa ajax
+        Route::post('/barang/', [BarangController::class, 'store']);
+        Route::get('/barang/create', [BarangController::class, 'create']);
+        Route::get('/barang/{id}', [BarangController::class, 'show']);
+        Route::get('/barang/{id}/edit', [BarangController::class, 'edit']);
+        Route::put('/barang/{id}', [BarangController::class, 'update']);
         Route::delete('/barang/{id}', [BarangController::class, 'destroy']);
     });
 
