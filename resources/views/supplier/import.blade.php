@@ -1,54 +1,58 @@
-<form action="{{ url('/level/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/supplier/import_ajax') }}" method="POST" id="form-import" enctype="multipart/form-data">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Level</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Import Data Supplier</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Level Kode</label>
-                    <input value="" type="text" name="level_kode" id="level_kode" class="form-control" required>
-                    <small id="error-level-kode" class="error-text form-text text-danger"></small>
+                    <label>Download Template</label>
+                    <a href="{{ asset('template_supplier.xlsx') }}" class="btn btn-info btn-sm" download><i class="fa fa-file-excel"></i> Download</a>
+                    <small id="error-kategori_id" class="error-text form-text text danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Level Nama</label>
-                    <input value="" type="text" name="level_nama" id="level_nama" class="form-control" required>
-                    <small id="error-level-nama" class="error-text form-text text-danger"></small>
+                    <label>Pilih File</label>
+                    <input type="file" name="file_supplier" id="file_supplier" class="form-control" required>
+                    <small id="error-file_supplier" class="error-text form-text text danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Upload</button>
             </div>
         </div>
     </div>
 </form>
+
 <script>
     $(document).ready(function() {
-        $("#form-tambah").validate({
+        $("#form-import").validate({
             rules: {
-                level_kode: { required: true, minlength: 3, maxlength: 10 },
-                level_nama: { required: true, minlength: 1, maxlength: 100 }
+                file_supplier: { required: true, extension: "xlsx" },
             },
-            submitHandler: function(form) {
+            submitHandler: function(form) { // Jadikan form ke FormData untuk menghandle file
+                var formData = new FormData(form);
+
                 $.ajax({
                     url: form.action,
                     type: form.method,
-                    data: $(form).serialize(),
+                    data: formData, // Data yang dikirim berupa FormData
+                    processData: false, // setting processData dan contentType ke false, untuk menghandle file
+                    contentType: false,
                     success: function(response) {
-                        if (response.status) {
+                        if (response.status) { // jika sukses
                             $('#myModal').modal('hide');
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            tableLevel.ajax.reload();
-                        } else {
+                            tableSupplier.ajax.reload(); // reload datatable
+                        } else { // jika error
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {
                                 $('#error-' + prefix).text(val[0]);
@@ -59,7 +63,7 @@
                                 text: response.message
                             });
                         }
-                    }
+                    },
                 });
                 return false;
             },
