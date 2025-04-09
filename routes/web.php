@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route didalam 
         Route::delete('/user/{id}/delete_ajax', [UserController::class, 'delete_ajax']); // Untuk hapus data user Ajax
         Route::get('/user/import', [UserController::class, 'import']); // ajax form upload excel
         Route::post('/user/import_ajax', [UserController::class, 'import_ajax']); // ajax import excel
+        Route::get('/user/export_excel', [UserController::class, 'export_excel']); // export excel
         // Tanpa ajax
         Route::post('/user/', [UserController::class, 'store']);
         Route::get('/user/create', [UserController::class, 'create']);
@@ -81,6 +82,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route didalam 
         Route::delete('/supplier/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']); // Untuk hapus data user Ajax
         Route::get('/supplier/import', [SupplierController::class, 'import']); // ajax form upload excel
         Route::post('/supplier/import_ajax', [SupplierController::class, 'import_ajax']); // ajax import excel
+        Route::get('/supplier/export_excel', [SupplierController::class, 'export_excel']); // export excel
         // Tanpa ajax
         Route::post('/supplier/', [SupplierController::class, 'store']);
         Route::get('/supplier/create', [SupplierController::class, 'create']);
@@ -103,6 +105,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route didalam 
         Route::delete('/level/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); // Untuk hapus data user Ajax
         Route::get('/level/import', [LevelController::class, 'import']); // ajax form upload excel
         Route::post('/level/import_ajax', [LevelController::class, 'import_ajax']); // ajax import excel
+        Route::get('/level/export_excel', [LevelController::class, 'export_excel']); // export excel
         // Tanpa ajax
         Route::post('/level/', [LevelController::class, 'store']);
         Route::get('/level/create', [LevelController::class, 'create']);
@@ -124,6 +127,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route didalam 
         Route::delete('/kategori/{id}/delete_ajax', [KategoriController::class, 'delete_ajax']); // Untuk hapus data user Ajax
         Route::get('/kategori/import', [KategoriController::class, 'import']); // ajax form upload excel
         Route::post('/kategori/import_ajax', [KategoriController::class, 'import_ajax']); // ajax import excel
+        Route::get('/kategori/export_excel', [KategoriController::class, 'export_excel']); // export excel
         // Tanpa ajax
         Route::post('/kategori/', [KategoriController::class, 'store']);
         Route::get('/kategori/create', [KategoriController::class, 'create']);

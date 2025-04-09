@@ -434,12 +434,12 @@ class BarangController extends Controller
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet(); // ambil sheet yang aktif
 
-        $sheet->setcellValue('A1', 'No');
-        $sheet->setcellValue('B1', 'Kode Barang');
-        $sheet->setcellValue('C1', 'Nama Barang');
-        $sheet->setcellValue('D1', 'Harga Beli');
-        $sheet->setcellValue('E1', 'Harga Jual');
-        $sheet->setcellValue('F1', 'Kategori');
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Kode Barang');
+        $sheet->setCellValue('C1', 'Nama Barang');
+        $sheet->setCellValue('D1', 'Harga Beli');
+        $sheet->setCellValue('E1', 'Harga Jual');
+        $sheet->setCellValue('F1', 'Kategori');
 
         $sheet->getStyle('A1:F1')->getFont()->setBold(true); // bold header
         
@@ -447,12 +447,12 @@ class BarangController extends Controller
         $no = 1; // nomor data dimulai dari 1
         $baris = 2; // baris data dimulai dari baris ke 2
         foreach ($barang as $key => $value) {
-            $sheet->setcellValue('A' . $baris, $no);
-            $sheet->setcellValue('B' . $baris, $value->barang_kode);
-            $sheet->setcellValue('C' . $baris, $value->barang_nama);
-            $sheet->setcellValue('D' . $baris, $value->harga_beli);
-            $sheet->setcellValue('E' . $baris, $value->harga_jual);
-            $sheet->setcellValue('F' . $baris, $value->kategori->kategori_nama); // ambil nama kategori
+            $sheet->setCellValue('A' . $baris, $no);
+            $sheet->setCellValue('B' . $baris, $value->barang_kode);
+            $sheet->setCellValue('C' . $baris, $value->barang_nama);
+            $sheet->setCellValue('D' . $baris, $value->harga_beli);
+            $sheet->setCellValue('E' . $baris, $value->harga_jual);
+            $sheet->setCellValue('F' . $baris, $value->kategori->kategori_nama); // ambil nama kategori
             $baris++;
             $no++;
         }
