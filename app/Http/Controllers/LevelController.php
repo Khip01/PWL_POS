@@ -424,6 +424,7 @@ class LevelController extends Controller
             ->get();
 
         // Use Barryvdh\DomPDF\Facade\Pdf;
+        // return view('level.export_pdf', ['level' => $level]);
         $pdf = Pdf::loadView('level.export_pdf', ['level' => $level]);
         $pdf->setPaper('a4', 'portrait'); // Set paper size and orientation
         $pdf->setOption('isRemoteEnabled', true); // Set true if there are images from URL

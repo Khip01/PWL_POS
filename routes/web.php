@@ -5,6 +5,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -39,7 +40,7 @@ Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postlogin']);
-Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'postregister']);
@@ -47,6 +48,10 @@ Route::post('register', [AuthController::class, 'postregister']);
 Route::middleware(['auth'])->group(function () { // artinya semua route didalam group ini harus login dulu
     // masukkan semua route yang perlu autentikasi di sini
     Route::get('/', [WelcomeController::class, 'index']);
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/import', [ProfileController::class, 'import'])->middleware('auth'); // ajax import excel
+    Route::post('/profile/import_ajax', [ProfileController::class, 'import_ajax'])->middleware('auth'); // ajax import excel
 
     Route::middleware(['authorize:ADM'])->group(function () {
         Route::get('/user/', [UserController::class, 'index']);
