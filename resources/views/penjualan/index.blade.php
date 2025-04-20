@@ -77,7 +77,8 @@
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d) {
-                        d.filter_user = $('.filter_user').val();
+                        d.user_id = $('.filter_user').val();
+                        console.log($('.filter_user').val());
                     }
                 },
                 columns: [

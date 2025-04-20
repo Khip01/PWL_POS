@@ -38,15 +38,15 @@ class PenjualanController extends Controller
 
     public function list(Request $request)
     {
-        $penjualan = PenjualanModel::select('penjualan_id', 'user_id', 'pembeli', 'penjualan_kode', 'penjualan_tanggal')
+        $penjualans = PenjualanModel::select('penjualan_id', 'user_id', 'pembeli', 'penjualan_kode', 'penjualan_tanggal')
             ->with('user');
 
-        // Filter data berdasarkan penjualan
-        if ($request->penjualan_id) {
-            $penjualan->where('penjualan_id', $request->penjualan_id);
+        // Filter data berdasarkan user
+        if ($request->user_id) {
+            $penjualans->where('user_id', $request->user_id);
         }
 
-        return DataTables::of($penjualan)
+        return DataTables::of($penjualans)
             // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addIndexColumn()
             ->addColumn('aksi', function ($penjualan) {
