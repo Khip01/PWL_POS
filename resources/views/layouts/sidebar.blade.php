@@ -47,13 +47,13 @@
           </li>
           <li class="nav-header">Data Transaksi</li>
           <li class="nav-item">
-              <a href="{{ url('/stok') }}" class="nav-link disabled {{ ($activeMenu == 'stok')? 'active': '' }}">
+              <a href="{{ url('/stok') }}" class="nav-link {{ ($activeMenu == 'stok')? 'active': '' }}">
                   <i class="nav-icon fas fa-cubes"></i>
                   <p>Stok Barang</p>
               </a>
           </li>
           <li class="nav-item">
-              <a href="{{ url('/barang') }}" class="nav-link disabled {{ ($activeMenu == 'penjualan')? 'active': '' }}">
+              <a href="{{ url('/penjualan') }}" class="nav-link {{ ($activeMenu == 'penjualan')? 'active': '' }}">
                   <i class="nav-icon fas fa-cash-register"></i>
                   <p>Transaksi Penjualan</p>
               </a>
@@ -65,9 +65,9 @@
             </a>
           </li>
           <li class="nav-item mt-4">
-            <a href="{{ url('/logout') }}" class="nav-link btn btn-danger btn-block" style="background-color: #dc3545; color: white;" 
-               onmouseover="this.style.backgroundColor='#e63946'" 
-               onmouseout="this.style.backgroundColor='#dc3545'" 
+            <a href="{{ url('/logout') }}" class="nav-link btn btn-danger btn-block" style="background-color: #dc3545; color: white;"
+               onmouseover="this.style.backgroundColor='#e63946'"
+               onmouseout="this.style.backgroundColor='#dc3545'"
                onclick="return confirm('Apakah Anda yakin ingin logout?');">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>Logout</p>
@@ -77,6 +77,6 @@
   </nav>
   {{-- Logout Button --}}
   {{-- <div class="mt-4">
-    
+
   </div> --}}
 </div>

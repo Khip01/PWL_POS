@@ -1,4 +1,4 @@
-@empty($user)
+@empty($penjualan)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,18 +12,18 @@
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                     Data yang anda cari tidak ditemukan
                 </div>
-                <a href="{{ url('/user') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ url('/penjualan') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
 @else
-    <form action="{{ url('/user/' . $user->user_id . '/delete_ajax') }}" method="POST" id="form-delete">
+    <form action="{{ url('/penjualan/' . $penjualan->penjualan_id . '/delete_ajax') }}" method="POST" id="form-delete">
         @csrf
         @method('DELETE')
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Penjualan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -33,19 +33,61 @@
                         <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
                         Apakah Anda ingin menghapus data seperti di bawah ini?
                     </div>
-                    <table class="table table-sm table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-hover table-sm">
                         <tr>
-                            <th class="text-right col-3">Level Pengguna:</th>
-                            <td class="col-9">{{ $user->level->level_nama }}</td>
+                            <th>ID</th>
+                            <td>{{ $penjualan->penjualan_id }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right col-3">Username:</th>
-                            <td class="col-9">{{ $user->username }}</td>
+                            <th>Username</th>
+                            <td>{{ $penjualan->user->username }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right col-3">Nama:</th>
-                            <td class="col-9">{{ $user->nama }}</td>
+                            <th>Pembeli</th>
+                            <td>{{ $penjualan->pembeli }}</td>
                         </tr>
+                        <tr>
+                            <th>Kode Penjualan</th>
+                            <td>{{ $penjualan->penjualan_kode }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Penjualan</th>
+                            <td>{{ $penjualan->penjualan_tanggal }}</td>
+                        </tr>
+                    </table>
+
+                    <h5>Detail Penjualan</h5>
+                    <table class="table table-bordered table-striped table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th>Detail ID</th>
+                            <th>Nama Penjualan</th>
+                            <th>Kode Penjualan</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Subtotal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php $total = 0; @endphp
+                        @foreach ($penjualan->penjualanDetail as $detail)
+                            @php $subtotal = $detail->harga * $detail->jumlah; $total += $subtotal; @endphp
+                            <tr>
+                                <td>{{ $detail->detail_id }}</td>
+                                <td>{{ $detail->barang->barang_nama }}</td>
+                                <td>{{ $detail->barang->barang_kode }}</td>
+                                <td>Rp {{ number_format($detail->harga, 0, ',', '.') }}</td>
+                                <td>{{ $detail->jumlah }}</td>
+                                <td>Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="5" class="text-right">Total:</th>
+                            <th>Rp {{ number_format($total, 0, ',', '.') }}</th>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -72,7 +114,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                tableUser.ajax.reload();
+                                tablePenjualan.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {
