@@ -109,4 +109,13 @@
             }
         });
     });
+
+    // Set default date to today's date in YYYY-MM-DD format
+    document.getElementById("stok_tanggal").value = new Date().toISOString().split('T')[0];
+
+    // Initialize the datepicker for the date input
+    $('#stok_tanggal').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true
+    });
 </script>

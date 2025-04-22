@@ -261,8 +261,8 @@ class StokController extends Controller
                                 'supplier_id' => $value['A'],
                                 'barang_id' => $value['B'],
                                 'user_id' => $value['C'],
-                                'stok_tanggal' => $value['D'],
-                                'stok_jumlah' => $value['E'],
+                                'stok_jumlah' => $value['D'],
+                                'stok_tanggal' => now(),
                                 'created_at' => now(),
                             ];
                         }

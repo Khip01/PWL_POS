@@ -198,8 +198,8 @@ Route::middleware(['auth'])->group(function () { // artinya semua route didalam 
         Route::put('/penjualan/{id}/update_ajax', [PenjualanController::class, 'update_ajax']); // Menyimpan perubahan data penjualan Ajax
         Route::get('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete penjualan Ajax
         Route::delete('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'delete_ajax']); // Untuk hapus data penjualan Ajax
-        Route::get('/penjualan/import', [PenjualanController::class, 'import']); // ajax form upload excel
-        Route::post('/penjualan/import_ajax', [PenjualanController::class, 'import_ajax']); // ajax import excel
+        // Route::get('/penjualan/import', [PenjualanController::class, 'import']); // ajax form upload excel
+        // Route::post('/penjualan/import_ajax', [PenjualanController::class, 'import_ajax']); // ajax import excel
         Route::get('/penjualan/export_excel', [PenjualanController::class, 'export_excel']); // export excel
         Route::get('/penjualan/export_pdf', [PenjualanController::class, 'export_pdf']); // export pdf
     });

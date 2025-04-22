@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label>Username</label>
                     <select name="user_id" id="user_id" class="form-control" required>
                         <option value="">- Pilih Username -</option>
@@ -18,7 +18,7 @@
                         @endforeach
                     </select>
                     <small id="error-user_id" class="error-text form-text text-danger"></small>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label>Pembeli</label>
                     <input value="" type="text" name="pembeli" id="pembeli" class="form-control" required>
@@ -257,5 +257,14 @@
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID').format(number);
         }
+    });
+
+    // Set default date to today's date in YYYY-MM-DD format
+    document.getElementById("penjualan_tanggal").value = new Date().toISOString().split('T')[0];
+
+    // Initialize the datepicker for the date input
+    $('#penjualan_tanggal').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true
     });
 </script>
