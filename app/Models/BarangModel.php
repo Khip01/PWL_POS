@@ -25,11 +25,11 @@ class BarangModel extends Model
     {
         $stokMasuk = DB::table('t_stok')
             ->where('barang_id', $this->barang_id)
-            ->sum('stok_jumlah');  // 21
+            ->sum('stok_jumlah');
 
         $stokKeluar = DB::table('t_penjualan_detail')
             ->where('barang_id', $this->barang_id)
-            ->sum('jumlah'); // 4
+            ->sum('jumlah');
 
         return $stokMasuk - $stokKeluar;
     }
