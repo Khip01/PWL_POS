@@ -131,6 +131,7 @@ class ProfileController extends Controller
 
                 // Menyimpan URL ke database
                 $user->profile_picture = Storage::url($path); // set profile_picture ke path file
+                // $user->profile_picture = $filename; // set profile_picture ke path file
                 $user->save();
 
                 return response()->json([

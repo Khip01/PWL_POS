@@ -22,14 +22,15 @@ class UserController extends Controller
             'username' => 'required|string|min:3|max:20|unique:m_user,username',
             'nama' => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
             'password' => 'required|min:5', // password harus diisi dan minimal 5 karakter
-            'level_id' => 'required|integer' // level id harus diisi dan berupa angka
+            'level_id' => 'required|integer', // level id harus diisi dan berupa angka
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // profile picture, harus berupa gambar dengan ukuran maksimal 2MB
         ]);
-
+        
         //if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
+        
         $user = UserModel::create($request->all());
         return response()->json($user, 201);
     }
@@ -47,7 +48,8 @@ class UserController extends Controller
             'username' => 'nullable|string|min:3|max:20|unique:m_user,username,' . $user->user_id . ',user_id',
             'nama' => 'nullable|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
             'password' => 'nullable|min:5', // password bisa diisi (minimal 5 karakter) dan bisa tidak diisi
-            'level_id' => 'nullable|integer' // level id harus diisi dan berupa angka
+            'level_id' => 'nullable|integer', // level id harus diisi dan berupa angka
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // profile picture, harus berupa gambar dengan ukuran maksimal 2MB
         ]);
 
         //if validation fails
@@ -60,6 +62,7 @@ class UserController extends Controller
             'nama' => $request->nama ? $request->nama : $user->nama,
             'password' => $request->password ? bcrypt($request->password) : $user->password,
             'level_id' => $request->level_id ? $request->level_id : $user->level_id,
+            'profile_picture' => $request->profile_picture ? $request->profile_picture : $user->profile_picture,
         ]);
         // return UserModel::find($user);
         return $user;
