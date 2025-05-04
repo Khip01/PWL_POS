@@ -22,7 +22,8 @@ class BarangController extends Controller
             'barang_nama' => 'required|string|max:100',
             'harga_beli' => 'required|integer',
             'harga_jual' => 'required|integer',
-            'kategori_id' => 'required|integer'
+            'kategori_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // image, harus berupa gambar dengan ukuran maksimal 2MB
         ]);
 
         //if validation fails
@@ -30,7 +31,12 @@ class BarangController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $barang = BarangModel::create($request->all());
+        // Menangani upload file gambar
+        // store ke storage
+        $file = $request->image; // ambil file dari request
+        $file->storeAs('barang_images', $file->hashName(), 'public'); // simpan
+
+        $barang = BarangModel::create(array_merge($request->all(), ['image' => $file->hashName()]));
         return response()->json($barang, 201);
     }
 
@@ -48,12 +54,27 @@ class BarangController extends Controller
             'barang_nama' => 'nullable|string|max:100',
             'harga_beli' => 'nullable|integer',
             'harga_jual' => 'nullable|integer',
-            'kategori_id' => 'nullable|integer'
+            'kategori_id' => 'nullable|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // image, harus berupa gambar dengan ukuran maksimal 2MB
         ]);
 
         //if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+
+        if ($request->hasFile('image')) {
+            // hapus dulu barang yang pernah ada
+            if ($barang->image) {
+                $path = storage_path('app\\public\\barang_images\\' . $barang->getRawOriginal('image'));
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+            $file = $request->image; // ambil file dari request
+            $file->storeAs('barang_images', $file->hashName(), 'public'); // simpan
+            $barang->update(['image' => $file->hashName()]);
         }
 
         $barang->update([
@@ -64,7 +85,7 @@ class BarangController extends Controller
             'kategori_id' => $request->kategori_id ? $request->kategori_id : $barang->kategori_id,
         ]);
         // return BarangModel::find($barang);
-        return $barang;
+        return response()->json($barang, 200);
         // $barang->update($request->all());
         // return $barang;
     }
@@ -72,6 +93,15 @@ class BarangController extends Controller
     public function destroy(BarangModel $barang)
     {
         $barang->delete();
+
+        // Hapus file gambar dari storage
+        if ($barang->image) {
+            $path = storage_path('app\\public\\barang_images\\' . $barang->getRawOriginal('image'));
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Data terhapus',
